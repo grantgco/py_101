@@ -1,14 +1,20 @@
 # November 19, 2023
 
 import random
+import sys
 
 name = ""
-question = "Is it raining?"
+question = ""
 answer = ""
 
 random_number = random.randint(1,9)
 
 #print(random_number)
+
+if question == "":
+  print("OMG.  The fabric of the world is in jepoardy.  There is no question!")
+  sys.exit()
+
 
 if random_number == 1:
   answer ="Yes - definitely"
