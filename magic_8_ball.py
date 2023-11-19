@@ -11,10 +11,11 @@ random_number = random.randint(1,9)
 
 #print(random_number)
 
-if question == "":
+if question == "": # Error to exit the script if the world is going to explode because there is no question being asked.
   print("OMG.  The fabric of the world is in jepoardy.  There is no question!")
   sys.exit()
 
+# Otherwise, continue...
 
 if random_number == 1:
   answer ="Yes - definitely"
