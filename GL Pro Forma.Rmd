@@ -1,0 +1,122 @@
+---
+title: "GL Only Pro Forma Analysis"
+output:
+  html_document: default
+  pdf_document: default
+date: "`r Sys.Date()`"
+params: 
+  CV:
+---
+
+```{r setup, include=FALSE}
+
+options(scipen=999)
+
+library(gt)
+library(gtExtras)
+library(ggplot2)
+library(dplyr)
+```
+
+```{r echo=FALSE}
+############################################################################
+# The following are project specific variables used to produce the report. #
+############################################################################
+
+project_name <- "Sample"
+project_CV <- 2000000
+project_value <- 2000000
+project_percent_payroll <- .18
+projected_project_payroll <- project_value * project_percent_payroll
+```
+
+## Project Analysis - `r project_name`
+
+| **Project Summary** |                               | 
+| :-----------------  |:------------------------------|
+| Project Name:       |                               |
+| Contract Value:     | `r project_value`             |
+| Payroll % to Value  | `r project_percent_payroll`   | 
+
+
+TODO - Written narrative about what is being done in report.
+
+```{r cars}
+# TODO Traditional Insurance Costs
+
+#mwrap_ICW_data <- read.csv('MWrapICW.csv')
+
+
+
+```
+
+## Potential Results
+
+TODO - 
+
+```{r echo=TRUE}
+losses <- seq(0, 200000, by = 50000)
+fixed_expenses <- 100000
+credits <- 5000
+results <- (fixed_expenses + losses) - credits
+result_to_cv <- results / project_CV
+
+df <- data.frame(
+  losses,
+  fixed_expenses,
+  credits,
+  results,
+  result_to_cv
+) 
+
+g <- ggplot(df, aes(losses, results))
+
+presentation_table <- df %>% gt() %>%
+  cols_label(
+    losses = "Total Losses",
+    fixed_expenses = "Fixed Expenses",
+    credits = "Credits",
+    results = "Results",
+    result_to_cv = "Result to CV"
+  ) %>%
+  gt_theme_nytimes() %>%
+  tab_caption("Pro Forma Project Estimates") %>%
+  tab_footnote("Results may vary from estimates.") %>%
+  fmt_currency(
+    columns = c(
+      losses,
+      fixed_expenses,
+      credits,
+      results
+    ),
+    currency = "USD",
+    decimals = 0
+  ) %>%
+  fmt_percent(
+    columns = c(
+      result_to_cv
+    ),
+    decimals = 2
+  )
+  
+presentation_table
+```
+
+
+```{python}
+import pandas as pd
+print("Hello World")
+
+py_losses = range(0, 200000, 50000)
+
+print(list(py_losses))
+
+```
+
+Hello `python py_losses`
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
